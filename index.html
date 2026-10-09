@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumo de APIs e DOM</title>
+    <style>
+        /* Estilo Bento Box Dark Mode */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .bento-card {
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* O painel de pedidos ocupa as duas colunas */
+        .full-width {
+            grid-column: 1 / -1; 
+        }
+
+        h2 { margin-top: 0; color: #bb86fc; }
+        input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #2c2c2c;
+            color: #fff;
+            width: calc(100% - 24px);
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #bb86fc;
+            color: #000;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+        button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+        
+        /* Classes de estado */
+        .status { margin-top: 15px; font-weight: bold; }
+        .erro { color: #cf6679; }
+        .sucesso { color: #03dac6; }
+        .carregando { color: #f6a5c0; }
+
+        /* Estilos específicos */
+        dl { display: grid; grid-template-columns: auto 1fr; gap: 8px; }
+        dt { font-weight: bold; color: #bb86fc; }
+        .pokemon-img { width: 150px; height: 150px; display: block; margin: 0 auto; }
+        .pokemon-tipo {
+            display: inline-block;
+            background: #333;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        #historico-cep { list-style-type: none; padding: 0; font-size: 0.9em; color: #aaa; }
+    </style>
+</head>
+<body>
+
+    <!-- PARTE 1: Manipulação de Dados -->
+    <div class="bento-card full-width">
+        <h2>Painel de Faturamento</h2>
+        <p>Pedidos válidos e pagos processados pelo JavaScript:</p>
+        <ul id="lista-pedidos"></ul>
+        <h3 id="total-faturamento"></h3>
+    </div>
+
+    <!-- PARTE 2: Buscador de CEP -->
+    <div class="bento-card">
+        <h2>Buscador de CEP</h2>
+        <form id="form-cep">
+            <!-- Dica de teste: Um CEP de São Luís -->
+            <input type="text" id="input-cep" placeholder="Ex: 65071380" maxlength="9">
+            <button type="submit" id="btn-cep">Buscar Endereço</button>
+        </form>
+        <div id="status-cep" class="status"></div>
+        <dl id="resultado-cep"></dl>
+
+        <hr style="border-color: #333; margin: 20px 0;">
+        <h3>Histórico de Buscas</h3>
+        <ul id="historico-cep"></ul>
+    </div>
+
+    <!-- PARTE 3: Mini Pokédex -->
+    <div class="bento-card">
+        <h2>Mini Pokédex</h2>
+        <form id="form-pokemon">
+            <input type="text" id="input-pokemon" placeholder="Ex: pikachu">
+            <button type="submit" id="btn-pokemon">Buscar Pokémon</button>
+        </form>
+        <div id="status-pokemon" class="status"></div>
+        <div id="resultado-pokemon" style="text-align: center; margin-top: 15px;"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
